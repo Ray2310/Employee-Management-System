@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rayce.mapper.employeeMapper" >
+  <resultMap id="BaseResultMap" type="com.rayce.pojo.employee" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="last_name" property="lastName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="birth" property="birth" jdbcType="DATE" />
+  </resultMap>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.rayce.pojo.employee" >
+    insert into employee (id, last_name, email, 
+      gender, dept_id, birth)
+    values (#{id,jdbcType=INTEGER}, #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{birth,jdbcType=DATE})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.rayce.pojo.employee" >
+    update employee
+    set last_name = #{lastName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      birth = #{birth,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectByPrimaryKey" resultType="employee" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select e.id, e.last_name, e.email, e.gender, e.dept_id, e.birth ,d.dept_name
+    from employee e left join dept d
+    on e.dept_id = d.dept_id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, last_name, email, gender, dept_id, birth
+    from employee
+  </select>
+
+
+</mapper>
