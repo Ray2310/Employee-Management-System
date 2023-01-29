@@ -58,10 +58,29 @@
                 <a class="btn btn-sm btn-danger" th:href="@{'/deleteEmp/'+${li.getId()}}">删除</a>
               </td>
             </tr>
-
           </tbody>
         </table>
+        <!--分页的相关功能-->
+        <div style="text-align: center" >
+          <span th:if="${page.hasPreviousPage}">
+            <a class="btn btn-sm btn-primary"  th:href="@{/list/1}">首页</a>
+            <a class="btn btn-sm btn-primary"  th:href="@{'/list/' + ${page.prePage}}">上一页</a>
+          </span>
+
+          <span th:each="num : ${page.navigatepageNums}">
+            <a class="btn btn-sm btn-primary"  th:if="${page.pageNum==num}" th:href="@{'/list/'+${num}}" th:text="'['+${num}+']'" style="color:#d51313;"></a>
+            <a class="btn btn-sm btn-primary"  th:if="${page.pageNum!=num}" th:href="@{'/list/'+${num}}" th:text="${num} "></a>
+          </span>
+          <span th:if="${page.hasNextPage}">
+              <a class="btn btn-sm btn-primary"  th:href="@{'/list/'+${page.nextPage}}">下一页</a>
+              <a class="btn btn-sm btn-primary"  th:href="@{'/list/'+${page.pages}}">末页</a>
+          </span>
+
+        </div>
+
+
       </div>
+
     </main>
   </div>
 </div>

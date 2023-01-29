@@ -6,6 +6,7 @@
     <result column="last_name" property="lastName" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="INTEGER" />
+
     <result column="dept_id" property="deptId" jdbcType="INTEGER" />
     <result column="birth" property="birth" jdbcType="DATE" />
   </resultMap>

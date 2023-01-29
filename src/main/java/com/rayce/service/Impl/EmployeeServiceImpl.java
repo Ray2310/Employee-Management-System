@@ -1,5 +1,7 @@
 package com.rayce.service.Impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.rayce.mapper.deptMapper;
 import com.rayce.mapper.employeeMapper;
 import com.rayce.pojo.dept;
@@ -63,5 +65,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         return update;
     }
 
-
+    @Override
+    public PageInfo<employee> Page(Integer pageNum) {
+        //开启分页功能，每页显示4条数据
+        PageHelper.startPage(pageNum,8);
+        List<employee> list = EmpMapper.selectAll();
+        for(employee li : list){
+            dept dept = DeptMapper.selectByPrimaryKey(li.getDeptId());
+            li.setDep(dept);
+        }
+        //navigatePages 的作用 位置
+        PageInfo<employee> pageInfo = new PageInfo<>(list,4);
+        return pageInfo;
+    }
 }

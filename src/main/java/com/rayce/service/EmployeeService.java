@@ -1,5 +1,6 @@
 package com.rayce.service;
 
+import com.github.pagehelper.PageInfo;
 import com.rayce.pojo.dept;
 import com.rayce.pojo.employee;
 
@@ -13,4 +14,6 @@ public interface EmployeeService {
     int deleteById(Integer id);
     employee updateBefore(Integer id);
     int updateAfter(employee emp);
+
+    PageInfo<employee> Page(Integer pageNum);
 }
