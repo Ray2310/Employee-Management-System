@@ -5,6 +5,7 @@
 后端：
 
 - springBoot
+- springSecurity
 - mybatis
 - mysql
 
